@@ -38,11 +38,11 @@ npm run dev  # Start backend
 ```
 
 ## 📌 Roadmap  
-- ✅ Basic listing & search functionality  
-- ✅ User authentication & verification  
-- 🔄 AI roommate matching  
-- 🔄 Smart lease & payment integration  
-- 🔄 AR room preview feature  
+- Basic listing & search functionality  
+- User authentication & verification  
+- AI roommate matching  
+- Smart lease & payment integration  
+- AR room preview feature  
 
 ## 🤝 Contributing  
 1. Fork the repository  
