@@ -1,74 +1,79 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, Image } from 'react-native';
+import { useRouter } from 'expo-router';
+import HomeScreenImg from '@/assets/images/HomeScreen.png';
+import Logo from '@/assets/images/Logo.png';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const HomeScreen = () => {
+  const router = useRouter();
 
-export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <ImageBackground
+        source={HomeScreenImg}
+        resizeMode="contain"
+        style={styles.image}
+      >
+        <View style={styles.overlay}>
+          <Image source={Logo} style={styles.logo} resizeMode="contain" />
+
+          <TouchableOpacity style={styles.button} onPress={() => router.push('/Signin')}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => router.push('/SignUp')}>
+            <Text style={styles.signUpText}>
+              Don’t have an account? <Text style={styles.highlight}>Sign up</Text>
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
+  image: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  overlay: {
+    alignItems: 'center',
     position: 'absolute',
+    bottom: 160,
+  },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 32,
+  },
+  button: {
+    backgroundColor: '#4A90E2',
+    paddingVertical: 14,
+    paddingHorizontal: 40,
+    borderRadius: 8,
+    marginBottom: 12,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  signUpText: {
+    color: 'white',
+    fontSize: 14,
+  },
+  highlight: {
+    textDecorationLine: 'underline',
+    fontWeight: 'bold',
   },
 });
+
+export default HomeScreen;
+
+
