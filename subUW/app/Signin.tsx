@@ -1,11 +1,15 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useState } from 'react';
 import Checkbox from 'expo-checkbox';
+import { useRouter } from 'expo-router';
+
 
 
 
 export default function SignIn() {
   const [rememberMe, setRememberMe] = useState(false);
+  const router = useRouter();
+
 
   return (
     <View style={styles.container}>
@@ -31,8 +35,8 @@ export default function SignIn() {
         <Text style={styles.rememberText}>Remember me</Text>
       </View>
 
-      <TouchableOpacity style={styles.signInButton}>
-        <Text style={styles.signInText}>Sign in</Text>
+      <TouchableOpacity style={styles.signInButton} onPress={() => router.replace('/MainMenu')}>
+      <Text style={styles.signInText}>Sign in</Text>
       </TouchableOpacity>
     </View>
   );
