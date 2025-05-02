@@ -1,7 +1,50 @@
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, Image, FlatList, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // For search/filter icons
+import React, { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db, storage } from '../firebase';
+
+interface SubletListing {
+  id: string;
+  address: string;
+  description: string;
+  features: string[];
+  price: number;
+  bathrooms: number;
+  bedrooms: number;
+  isAvailable: boolean;
+  title: string;
+  userID: string;
+  startDate: string;
+  endDate: string;
+}
 
 export default function FindSublet() {
+  const [listings, setListings] = useState<SubletListing[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "Posts"));
+        const data: SubletListing[] = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...(doc.data() as Omit<SubletListing, "id">),
+        }));
+        setListings(data);
+        // console.log(data);
+      } catch (error) {
+        console.error("Failed to load sublets:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
+  if (loading) return <ActivityIndicator size="large" style={{ flex: 1 }} />;
+
   return (
     <View style={styles.container}>
       {/* Top gradient banner */}
@@ -26,19 +69,18 @@ export default function FindSublet() {
       <ScrollView contentContainerStyle={styles.feedContainer}>
         <Text style={styles.sectionTitle}>Recommended</Text>
 
-        {/* Mock Listings */}
-        {[1, 2].map((item) => (
-          <View key={item} style={styles.card}>
+        {listings.map((item) => (
+          <View key={item.id} style={styles.card}>
             <View style={styles.imagePlaceholder}>
-              {/* In future, replace with: <Image source={{ uri: imageUrl }} /> */}
-              <Text style={styles.priceTag}>${item === 1 ? '2200' : '1600'}</Text>
+              {/* Replace with actual image */}
+              {/* <Image source={{ uri: item.imageUrl }} style={{ width: "100%", height: 150 }} /> */}
+              <Text style={styles.priceTag}>${item.price}</Text>
             </View>
             <View style={styles.cardContent}>
-              <Text style={styles.address}>Building Address*</Text>
-              <Text style={styles.desc}>{item === 1 ? '- 5 Bedroom,' : '- 2 Bedroom,'}</Text>
-              <Text style={styles.date}>
-                {item === 1 ? '05/14/2025–08/27/2025' : '06/13/2025–09/20/2025'}
-              </Text>
+              <Text style={styles.address}>{item.address}</Text>
+              <Text style={styles.desc}>{item.description}</Text>
+              <Text style={styles.desc}>{`${item.bedrooms} Bedroom, ${item.bathrooms} Bathroom`}</Text>
+              <Text style={styles.date}>{`${item.startDate} - ${item.endDate}`}</Text>
             </View>
           </View>
         ))}
@@ -46,8 +88,6 @@ export default function FindSublet() {
     </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
     container: {
