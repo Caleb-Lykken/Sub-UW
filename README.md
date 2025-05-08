@@ -1,47 +1,65 @@
 # 🏡 Sub-UW (UW Student Subletting App)
 
-## 📌 Overview  
-This app helps **UW students safely and efficiently find or offer sublets** by providing verified listings, secure payments, in-app messaging, and community building features.  
+## Overview  
+This app helps **UW students safely and efficiently find or offer sublets** by providing sublet listings, strong filtering capabilities, and community building features.  
 
-## 🚀 Features  
-- **Secure Listings & Search** – Verified sublets with advanced filters.  
-- **Trust & Safety** – University email verification, ratings, and fraud detection.  
-- **Messaging & Notifications** – In-app chat, push notifications, and alerts.  
+## Installation  
 
-## 🛠 Planned Tech Stack  
-- **Frontend**: React 
-- **Backend**: Node.js/Flask 
-- **Database**: MSSQL 
-- **Geolocation**: Google Maps API / Mapbox  
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## 📖 Installation  
-### 1️⃣ Clone the Repository  
-```bash  
-git clone https://github.com/yourusername/subletting-app.git  
-cd subletting-app  
-```
-### 2️⃣ Install Dependencies  
-```bash  
-npm install  # For frontend/backend  
-pip install -r requirements.txt  # If using Python backend  
-```
-### 3️⃣ Set Up Environment Variables  
-Create a `.env` file with API keys and database credentials. Example:  
-```env  
-DATABASE_URL=your_database_url  
-STRIPE_SECRET_KEY=your_stripe_key  
-```
-### 4️⃣ Run the App  
-```bash  
-npm start  # Start frontend  
-npm run dev  # Start backend  
+## Get started
+
+1. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+2. Start the app
+
+   ```bash
+    npx expo start
+   ```
+
+In the output, you'll find options to open the app in a
+
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Get a fresh project
+
+When you're ready, run:
+
+```bash
+npm run reset-project
 ```
 
-## 📌 Roadmap  
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+
+## Learn more
+
+To learn more about developing your project with Expo, look at the following resources:
+
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+
+## Join the community
+
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+
+## Roadmap  
 - Basic listing & search functionality  
 - User authentication & verification  
 
-## 🤝 Contributing  
+## Contributing  
 1. Fork the repository  
 2. Create a new branch: `git checkout -b feature-name`  
 3. Commit changes: `git commit -m "Added new feature"`  
@@ -49,4 +67,4 @@ npm run dev  # Start backend
 5. Open a Pull Request  
 
 ## 🛡 License  
-MIT License  
+MIT License

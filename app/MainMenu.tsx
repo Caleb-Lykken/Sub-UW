@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import HeaderImage from '@/assets/images/Mainmenu.png'; 
+import HeaderImage from '@/assets/images/Mainmenu.png';
 
 export default function MainMenu() {
   const router = useRouter();
