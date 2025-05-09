@@ -14,8 +14,6 @@ interface SubletListing {
   price: number;
   bathrooms: number;
   bedrooms: number;
-  isAvailable: boolean;
-  title: string;
   userID: string;
   startDate: string;
   endDate: string;
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
       width: '90%',
       height: 42,
       gap: 6,
-      marginTop: '-5%',
+      marginTop: '-8%',
       marginLeft: '5%',
       marginRight: '5%',
     },
@@ -138,7 +136,7 @@ const styles = StyleSheet.create({
       fontSize: 14,
     },
     feedContainer: {
-      padding: 16,
+      padding: '5%',
     },
     sectionTitle: {
       color: 'white',
@@ -155,7 +153,6 @@ const styles = StyleSheet.create({
     imagePlaceholder: {
       width: '100%',
       overflow: 'hidden',
-      backgroundColor: '#aaa',
       justifyContent: 'center',
       alignItems: 'center',
     },

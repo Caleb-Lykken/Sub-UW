@@ -15,8 +15,6 @@ interface SubletListing {
   price: number;
   bathrooms: number;
   bedrooms: number;
-  isAvailable: boolean;
-  title: string;
   userID: string;
   startDate: string;
   endDate: string;

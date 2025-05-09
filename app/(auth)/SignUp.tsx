@@ -1,6 +1,9 @@
 import { SafeAreaView, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function SignUp() {
+  const router = useRouter();
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Sign Up</Text>
@@ -14,7 +17,7 @@ export default function SignUp() {
       <TextInput placeholder="Password" style={styles.input} secureTextEntry placeholderTextColor="#ccc" />
       <TextInput placeholder="Confirm your password" style={styles.input} secureTextEntry placeholderTextColor="#ccc" />
 
-      <TouchableOpacity style={styles.signUpButton}>
+      <TouchableOpacity style={styles.signUpButton} onPress={() => router.replace('/MainMenu')}>
         <Text style={styles.signUpText}>Sign up</Text>
       </TouchableOpacity>
     </SafeAreaView>

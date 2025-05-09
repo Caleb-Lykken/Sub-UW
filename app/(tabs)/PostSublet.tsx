@@ -4,9 +4,9 @@ import { Ionicons } from '@expo/vector-icons';
 
 const amenities = [
   'Parking', 'Water', 'Trash', 'Electricity',
-  'Pet', 'In-Unit Laundry', 'On-unit Laundry', 'Security',
-  'Fitness', 'Air Condition', 'Dishwash Machine', 'Pool',
-  'Heater Included', 'Online Payment',
+  'Pet', 'In-Unit Laundry', 'In-Building Laundry', 'Security',
+  'Fitness', 'Air Conditioning', 'Dishwasher', 'Pool',
+  'Heater', 'Online Payment',
 ];
 
 const accessibility = [
@@ -14,9 +14,35 @@ const accessibility = [
   'Service Animal Friendly', 'Visual Aid', 'Hearing Aid', 'Parking Accessibility', 'Accessible Kitchen',
 ];
 
+const bedrooms = [1, 2, 3, 4, 5];
+
+const bathrooms = [1, 1.5, 2, 3, 4,];
+
+interface SubletListing {
+  id: string;
+  address: string;
+  description: string;
+  features: string[];
+  price: number;
+  bathrooms: number;
+  bedrooms: number;
+  userID: string;
+  startDate: string;
+  endDate: string;
+}
+
 export default function PostSublet() {
+  const [address, setAddress] = useState<string>();
+  const [rent, setRent] = useState<string>();
+  const [selectedBedrooms, setSelectedBedrooms] = useState<number>();
+  const [selectedBathrooms, setSelectedBathrooms] = useState<number>();
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [selectedAccess, setSelectedAccess] = useState<string[]>([]);
+  const [startDate, setStartDate] = useState<string>();
+  const [endDate, setEndDate] = useState<string>();
+  const [description, setDescription] = useState<string>();
+
+  const [listing, setListing] = useState<SubletListing>();
 
   const toggleItem = (item: string, list: string[], setList: React.Dispatch<React.SetStateAction<string[]>>) => {
     setList(list.includes(item) ? list.filter(i => i !== item) : [...list, item]);
@@ -31,21 +57,61 @@ export default function PostSublet() {
 
       {/* Form */}
       <SafeAreaView style={styles.form}>
-        <Text style={styles.label}>Building Name *</Text>
-        <TextInput style={styles.input} placeholder="Ex: The Nine" />
-
         <Text style={styles.label}>Building Address *</Text>
-        <TextInput style={styles.input} placeholder="1234 Ave NE" />
+        <TextInput style={styles.input}
+          placeholder="Ex. 1234 Ave NE"
+          onChangeText={setAddress}/>
 
-        {/* Dropdowns (can replace with pickers later) */}
-        <TouchableOpacity style={styles.dropdown}>
-          <Text style={styles.dropdownText}>Bedroom Size ▼</Text>
-        </TouchableOpacity>
+        <Text style={styles.label}>Current Rent *</Text>
+        <TextInput style={styles.input}
+          placeholder="Ex. 1100"
+          inputMode='numeric'
+          onChangeText={setRent}/>
 
-        <TouchableOpacity style={styles.dropdown}>
-          <Text style={styles.dropdownText}>Bathroom ▼</Text>
-        </TouchableOpacity>
+        <Text style={styles.label}>Start Date *</Text>
+        <TextInput style={styles.input}
+          placeholder="MM/DD/YYYY"
+          onChangeText={setStartDate}/>
 
+        <Text style={styles.label}>End Date *</Text>
+        <TextInput style={styles.input}
+          placeholder="MM/DD/YYYY"
+          onChangeText={setEndDate}/>
+
+        {/* Bed and Bath Selection */}
+        <Text style={styles.label}>Number of Bedrooms *</Text>
+        <SafeAreaView style={styles.grid}>
+          {bedrooms.map(item => (
+            <TouchableOpacity
+              key={item}
+              style={[
+                styles.tag2,
+                item == selectedBedrooms && styles.tagSelected
+              ]}
+              onPress={() => setSelectedBedrooms(item)}
+            >
+              <Text style={styles.tagText}>{item}</Text>
+            </TouchableOpacity>
+          ))}
+        </SafeAreaView>
+
+        <Text style={styles.label}>Number of Bathrooms *</Text>
+        <SafeAreaView style={styles.grid}>
+          {bathrooms.map(item => (
+            <TouchableOpacity
+              key={item}
+              style={[
+                styles.tag2,
+                item == selectedBathrooms && styles.tagSelected
+              ]}
+              onPress={() => setSelectedBathrooms(item)}
+            >
+              <Text style={styles.tagText}>{item}</Text>
+            </TouchableOpacity>
+          ))}
+        </SafeAreaView>
+
+        {/* Tags list */}
         <Text style={styles.section}>Amenities Included *</Text>
         <SafeAreaView style={styles.grid}>
           {amenities.map(item => (
@@ -78,17 +144,20 @@ export default function PostSublet() {
           ))}
         </SafeAreaView>
 
-        <Text style={styles.section}>Additional Notes</Text>
-        <TextInput style={[styles.input, { height: 80 }]} multiline placeholder="Any extra info..." />
+        <Text style={styles.section}>Description</Text>
+        <TextInput
+          style={[styles.input, { height: 80 }]}
+          multiline placeholder="Any extra info..."
+          onChangeText={setDescription}/>
       </SafeAreaView>
 
-      {/* Buttons */}
+      {/* Cancel and Confirm buttons */}
       <SafeAreaView style={styles.buttonRow}>
         <TouchableOpacity style={[styles.button, styles.cancel]}>
           <Text style={styles.buttonText}>Cancel</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, styles.next]}>
-          <Text style={styles.buttonText}>Next</Text>
+          <Text style={styles.buttonText}>Post</Text>
         </TouchableOpacity>
       </SafeAreaView>
     </ScrollView>
@@ -131,15 +200,6 @@ const styles = StyleSheet.create({
       padding: 10,
       marginBottom: 16,
     },
-    dropdown: {
-      backgroundColor: 'white',
-      borderRadius: 8,
-      padding: 14,
-      marginBottom: 16,
-    },
-    dropdownText: {
-      fontSize: 14,
-    },
     section: {
       color: '#fff',
       marginTop: 12,
@@ -157,6 +217,14 @@ const styles = StyleSheet.create({
       paddingVertical: 6,
       paddingHorizontal: 10,
       borderRadius: 8,
+    },
+    tag2: {
+      backgroundColor: 'white',
+      paddingVertical: 8,
+      paddingHorizontal: 10,
+      borderRadius: 8,
+      width: '15%',
+      alignItems: 'center',
     },
     tagSelected: {
       backgroundColor: '#d4a0ff',
