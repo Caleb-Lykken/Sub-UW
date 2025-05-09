@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const amenities = [
@@ -25,12 +25,12 @@ export default function PostSublet() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* Top Banner */}
-      <View style={styles.banner}>
+      <SafeAreaView style={styles.banner}>
         <Text style={styles.bannerText}>Create a Post</Text>
-      </View>
+      </SafeAreaView>
 
       {/* Form */}
-      <View style={styles.form}>
+      <SafeAreaView style={styles.form}>
         <Text style={styles.label}>Building Name *</Text>
         <TextInput style={styles.input} placeholder="Ex: The Nine" />
 
@@ -47,7 +47,7 @@ export default function PostSublet() {
         </TouchableOpacity>
 
         <Text style={styles.section}>Amenities Included *</Text>
-        <View style={styles.grid}>
+        <SafeAreaView style={styles.grid}>
           {amenities.map(item => (
             <TouchableOpacity
               key={item}
@@ -60,10 +60,10 @@ export default function PostSublet() {
               <Text style={styles.tagText}>{item}</Text>
             </TouchableOpacity>
           ))}
-        </View>
+        </SafeAreaView>
 
         <Text style={styles.section}>Accessibility</Text>
-        <View style={styles.grid}>
+        <SafeAreaView style={styles.grid}>
           {accessibility.map(item => (
             <TouchableOpacity
               key={item}
@@ -76,21 +76,21 @@ export default function PostSublet() {
               <Text style={styles.tagText}>{item}</Text>
             </TouchableOpacity>
           ))}
-        </View>
+        </SafeAreaView>
 
         <Text style={styles.section}>Additional Notes</Text>
         <TextInput style={[styles.input, { height: 80 }]} multiline placeholder="Any extra info..." />
-      </View>
+      </SafeAreaView>
 
       {/* Buttons */}
-      <View style={styles.buttonRow}>
+      <SafeAreaView style={styles.buttonRow}>
         <TouchableOpacity style={[styles.button, styles.cancel]}>
           <Text style={styles.buttonText}>Cancel</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, styles.next]}>
           <Text style={styles.buttonText}>Next</Text>
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     </ScrollView>
   );
 }
@@ -103,10 +103,10 @@ const styles = StyleSheet.create({
     },
     banner: {
       backgroundColor: '#7a4dd6',
-      paddingTop: 60,
-      paddingBottom: 30,
-      borderBottomLeftRadius: 50,
-      borderBottomRightRadius: 50,
+      paddingTop: 30,
+      paddingBottom: 40,
+      borderBottomLeftRadius: 40,
+      borderBottomRightRadius: 40,
       alignItems: 'center',
     },
     bannerText: {
@@ -116,6 +116,10 @@ const styles = StyleSheet.create({
     },
     form: {
       padding: 16,
+      width: '80%',
+      marginTop: 16,
+      marginLeft: '10%',
+      marginRight: '10%',
     },
     label: {
       color: 'white',

@@ -1,8 +1,10 @@
-import { View, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, Image, FlatList, ActivityIndicator } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, Image, FlatList, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // For search/filter icons
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'expo-router';
 import { collection, getDocs } from 'firebase/firestore';
-import { db, storage } from '../firebase';
+import { db, storage } from '@/firebase';
+import PlaceHolder from '@/assets/images/placeholder.png';
 
 interface SubletListing {
   id: string;
@@ -20,6 +22,7 @@ interface SubletListing {
 }
 
 export default function FindSublet() {
+  const router = useRouter();
   const [listings, setListings] = useState<SubletListing[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -46,46 +49,48 @@ export default function FindSublet() {
   if (loading) return <ActivityIndicator size="large" style={{ flex: 1 }} />;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Top gradient banner */}
-      <View style={styles.banner}>
+      <SafeAreaView style={styles.banner}>
         <Text style={styles.bannerText}>Look for Sublets</Text>
-
-        {/* Search bar with filter button */}
-        <View style={styles.searchContainer}>
-          <Ionicons name="search" size={20} color="black" style={styles.searchIcon} />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search (Building Name, address etc.)"
-            placeholderTextColor="#666"
-          />
-          <TouchableOpacity onPress={() => console.log('Filter tapped')}>
-            <Ionicons name="options-outline" size={24} color="#333" />
-          </TouchableOpacity>
-        </View>
-      </View>
+      </SafeAreaView>
+      {/* Search bar with filter button */}
+      <SafeAreaView style={styles.searchContainer}>
+        <Ionicons name="search" size={20} color="black" style={styles.searchIcon} />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search (Building Name, address etc.)"
+          placeholderTextColor="#666"
+        />
+        <TouchableOpacity onPress={() => console.log('Filter tapped')}>
+          <Ionicons name="options-outline" size={24} color="#333" style={styles.optionsIcon} />
+        </TouchableOpacity>
+      </SafeAreaView>
 
       {/* Sublet Feed */}
       <ScrollView contentContainerStyle={styles.feedContainer}>
         <Text style={styles.sectionTitle}>Recommended</Text>
 
         {listings.map((item) => (
-          <View key={item.id} style={styles.card}>
-            <View style={styles.imagePlaceholder}>
-              {/* Replace with actual image */}
-              {/* <Image source={{ uri: item.imageUrl }} style={{ width: "100%", height: 150 }} /> */}
-              <Text style={styles.priceTag}>${item.price}</Text>
-            </View>
-            <View style={styles.cardContent}>
-              <Text style={styles.address}>{item.address}</Text>
-              <Text style={styles.desc}>{item.description}</Text>
-              <Text style={styles.desc}>{`${item.bedrooms} Bedroom, ${item.bathrooms} Bathroom`}</Text>
-              <Text style={styles.date}>{`${item.startDate} - ${item.endDate}`}</Text>
-            </View>
-          </View>
+          <TouchableOpacity>
+            <SafeAreaView key={item.id} style={styles.card}>
+              <SafeAreaView style={styles.imagePlaceholder}>
+                {/* Replace with actual image */}
+                {/* <Image source={{ uri: item.imageUrl }} style={{ width: "100%", height: 150 }} /> */}
+                <Image source={PlaceHolder} style={styles.imagePlaceholder} resizeMode="cover" />
+                <Text style={styles.priceTag}>${item.price}</Text>
+              </SafeAreaView>
+              <SafeAreaView style={styles.cardContent}>
+                <Text style={styles.address}>{item.address}</Text>
+                <Text style={styles.desc}>{item.description}</Text>
+                <Text style={styles.desc}>{`${item.bedrooms} bed, ${item.bathrooms} bath`}</Text>
+                <Text style={styles.date}>{`${item.startDate} - ${item.endDate}`}</Text>
+              </SafeAreaView>
+            </SafeAreaView>
+          </TouchableOpacity>
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -96,17 +101,16 @@ const styles = StyleSheet.create({
     },
     banner: {
       backgroundColor: '#7a4dd6',
-      paddingTop: 60,
-      paddingBottom: 30,
-      borderBottomLeftRadius: 50,
-      borderBottomRightRadius: 50,
+      paddingTop: 30,
+      paddingBottom: 40,
+      borderBottomLeftRadius: 40,
+      borderBottomRightRadius: 40,
       alignItems: 'center',
     },
     bannerText: {
       fontSize: 24,
       color: 'white',
       fontWeight: '600',
-      marginBottom: 16,
     },
     searchContainer: {
       flexDirection: 'row',
@@ -114,12 +118,20 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       paddingHorizontal: 12,
       borderRadius: 12,
-      width: '85%',
+      width: '90%',
       height: 42,
       gap: 6,
+      marginTop: '-5%',
+      marginLeft: '5%',
+      marginRight: '5%',
     },
     searchIcon: {
-      marginRight: 4,
+      marginLeft: 6,
+      marginRight: 0,
+    },
+    optionsIcon: {
+      marginLeft: 6,
+      marginRight: 6,
     },
     searchInput: {
       flex: 1,
@@ -141,7 +153,8 @@ const styles = StyleSheet.create({
       overflow: 'hidden',
     },
     imagePlaceholder: {
-      height: 160,
+      width: '100%',
+      overflow: 'hidden',
       backgroundColor: '#aaa',
       justifyContent: 'center',
       alignItems: 'center',
@@ -160,6 +173,10 @@ const styles = StyleSheet.create({
     },
     cardContent: {
       padding: 12,
+      marginTop: 6,
+      marginLeft: 12,
+      marginRight: 12,
+      marginBottom: 6,
     },
     address: {
       color: 'white',
@@ -168,7 +185,7 @@ const styles = StyleSheet.create({
     },
     desc: {
       color: '#ddd',
-      fontSize: 13,
+      fontSize: 12,
     },
     date: {
       color: '#ccc',

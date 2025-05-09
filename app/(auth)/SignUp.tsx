@@ -1,8 +1,8 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { SafeAreaView, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 export default function SignUp() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Sign Up</Text>
 
       <TouchableOpacity style={styles.imageUpload}>
@@ -17,7 +17,7 @@ export default function SignUp() {
       <TouchableOpacity style={styles.signUpButton}>
         <Text style={styles.signUpText}>Sign up</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#333',
-    padding: 24,
+    padding: '5%',
     justifyContent: 'center',
-    borderRadius: 24,
   },
   title: {
     fontSize: 32,
     color: 'white',
     textAlign: 'center',
-    marginBottom: 24,
+    marginBottom: '5%',
+    marginTop: '5%',
   },
   imageUpload: {
     width: 100,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: '10%',
   },
   input: {
     backgroundColor: '#444',
@@ -51,12 +51,16 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     color: 'white',
     marginBottom: 12,
+    marginLeft: '5%',
+    marginRight: '5%',
   },
   signUpButton: {
     backgroundColor: '#ccc',
     padding: 12,
     borderRadius: 8,
-    marginTop: 16,
+    marginTop: '10%',
+    marginLeft: '5%',
+    marginRight: '5%',
     alignItems: 'center',
   },
   signUpText: {
