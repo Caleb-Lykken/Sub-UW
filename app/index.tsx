@@ -1,33 +1,32 @@
 import { SafeAreaView, StyleSheet, ImageBackground, Text, TouchableOpacity, Image } from 'react-native';
 import { useRouter } from 'expo-router';
-import HomeBack from '@/assets/images/HomeBack.png';
 import WordMark from '@/assets/images/WordMark.png';
-import Logo from '@/assets/images/Logo.png';
+import Logo from '@/assets/images/logo_large.png';
 
 export default function HomeScreen() {
   const router = useRouter();
 
   return (
     <SafeAreaView style={styles.container} >
-      <ImageBackground
-        source={HomeBack}
-        resizeMode="cover"
-        style={styles.background}
-      >
+      <SafeAreaView style={styles.banner}>
         <Image source={WordMark} style={styles.wordmark} resizeMode="contain" />
-        <Image source={Logo} style={styles.logo} resizeMode="contain" />
-        <SafeAreaView style={styles.overlay}>
-          <TouchableOpacity style={styles.button} onPress={() => router.navigate('/Signin')}>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
+      </SafeAreaView>
 
-          <TouchableOpacity onPress={() => router.navigate('/SignUp')}>
-            <Text style={styles.signUpText}>
-              Don’t have an account? <Text style={styles.highlight}>Sign up</Text>
-            </Text>
-          </TouchableOpacity>
-        </SafeAreaView>
-      </ImageBackground>
+      <SafeAreaView style={styles.background}>
+        <Image source={Logo} style={styles.logo} resizeMode="contain" />
+      </SafeAreaView>
+
+      <SafeAreaView style={styles.overlay}>
+        <TouchableOpacity style={styles.button} onPress={() => router.navigate('/Signin')}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => router.navigate('/SignUp')}>
+          <Text style={styles.signUpText}>
+            Don’t have an account? <Text style={styles.highlight}>Sign up</Text>
+          </Text>
+        </TouchableOpacity>
+      </SafeAreaView>
     </SafeAreaView>
   );
 };
@@ -35,10 +34,10 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   banner: {
     backgroundColor: '#7a4dd6',
-    paddingTop: 60,
-    paddingBottom: 30,
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
+    paddingTop: 30,
+    paddingBottom: 40,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
     alignItems: 'center',
   },
   container: {
@@ -47,30 +46,25 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
-    width: '100%',
-    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    top: 0
   },
   overlay: {
     backgroundColor: '#333',
     paddingTop: '10%',
     paddingBottom: '10%',
-    // borderTopLeftRadius: 50,
-    // borderTopRightRadius: 50,
     alignItems: 'center',
     position: 'absolute',
     bottom: 0,
-    width: '100%'
+    width: '100%',
   },
   wordmark: {
     width: '80%',
-    bottom: '15%',
+    bottom: '0%',
   },
   logo: {
     width: '100%',
-    bottom: '10%',
+    bottom: '15%',
   },
   button: {
     backgroundColor: 'white',

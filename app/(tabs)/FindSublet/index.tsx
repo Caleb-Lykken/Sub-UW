@@ -27,7 +27,7 @@ export default function FindSublet() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "Posts"));
+        const querySnapshot = await getDocs(collection(db, "Sublets"));
         const data: SubletListing[] = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...(doc.data() as Omit<SubletListing, "id">),
@@ -50,7 +50,7 @@ export default function FindSublet() {
     <SafeAreaView style={styles.container}>
       {/* Top gradient banner */}
       <SafeAreaView style={styles.banner}>
-        <Text style={styles.bannerText}>Look for Sublets</Text>
+        <Text style={styles.bannerText}>Find a Sublet</Text>
       </SafeAreaView>
       {/* Search bar with filter button */}
       <SafeAreaView style={styles.searchContainer}>

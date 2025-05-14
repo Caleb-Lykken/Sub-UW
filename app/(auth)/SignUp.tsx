@@ -17,7 +17,7 @@ export default function SignUp() {
       <TextInput placeholder="Password" style={styles.input} secureTextEntry placeholderTextColor="#ccc" />
       <TextInput placeholder="Confirm your password" style={styles.input} secureTextEntry placeholderTextColor="#ccc" />
 
-      <TouchableOpacity style={styles.signUpButton} onPress={() => router.replace('/MainMenu')}>
+      <TouchableOpacity style={styles.signUpButton} onPress={() => router.replace('/FindSublet')}>
         <Text style={styles.signUpText}>Sign up</Text>
       </TouchableOpacity>
     </SafeAreaView>

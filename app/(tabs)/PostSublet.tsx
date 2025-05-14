@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { SafeAreaView, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { addDoc, collection } from "firebase/firestore";
+import { db, storage } from '@/firebase';
 
 const amenities = [
   'Parking', 'Water', 'Trash', 'Electricity',
@@ -48,11 +50,52 @@ export default function PostSublet() {
     setList(list.includes(item) ? list.filter(i => i !== item) : [...list, item]);
   };
 
+  const clearForm = () => {
+    setAddress("");
+    setRent("");
+    setStartDate("");
+    setEndDate("");
+    setSelectedBedrooms(undefined);
+    setSelectedBathrooms(undefined);
+    setSelectedAmenities([]);
+    setSelectedAccess([]);
+    setDescription("");
+  };
+
+  const handleSubmit = async () => {
+  if (!address || !rent || !startDate || !endDate || !selectedBedrooms || !selectedBathrooms) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  const newListing: Omit<SubletListing, "id"> = {
+    address,
+    price: parseFloat(rent),
+    startDate,
+    endDate,
+    bedrooms: selectedBedrooms,
+    bathrooms: selectedBathrooms,
+    features: [...selectedAmenities, ...selectedAccess],
+    description: description || "",
+    userID: "demoUser123", // replace with auth user ID if using auth
+  };
+
+  try {
+    await addDoc(collection(db, "Sublets"), newListing);
+    alert("Listing posted!");
+    // Optionally reset state or navigate
+  } catch (error) {
+    console.error("Error posting sublet:", error);
+    alert("Failed to post listing.");
+  }
+};
+
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {/* Top Banner */}
       <SafeAreaView style={styles.banner}>
-        <Text style={styles.bannerText}>Create a Post</Text>
+        <Text style={styles.bannerText}>Post a Sublet</Text>
       </SafeAreaView>
 
       {/* Form */}
@@ -60,22 +103,26 @@ export default function PostSublet() {
         <Text style={styles.label}>Building Address *</Text>
         <TextInput style={styles.input}
           placeholder="Ex. 1234 Ave NE"
+          value={address}
           onChangeText={setAddress}/>
 
         <Text style={styles.label}>Current Rent *</Text>
         <TextInput style={styles.input}
           placeholder="Ex. 1100"
           inputMode='numeric'
+          value={rent}
           onChangeText={setRent}/>
 
         <Text style={styles.label}>Start Date *</Text>
         <TextInput style={styles.input}
           placeholder="MM/DD/YYYY"
+          value={startDate}
           onChangeText={setStartDate}/>
 
         <Text style={styles.label}>End Date *</Text>
         <TextInput style={styles.input}
           placeholder="MM/DD/YYYY"
+          value={endDate}
           onChangeText={setEndDate}/>
 
         {/* Bed and Bath Selection */}
@@ -148,17 +195,21 @@ export default function PostSublet() {
         <TextInput
           style={[styles.input, { height: 80 }]}
           multiline placeholder="Any extra info..."
+          value={description}
           onChangeText={setDescription}/>
       </SafeAreaView>
 
       {/* Cancel and Confirm buttons */}
       <SafeAreaView style={styles.buttonRow}>
-        <TouchableOpacity style={[styles.button, styles.cancel]}>
+
+        <TouchableOpacity style={[styles.button, styles.cancel]} onPress={clearForm}>
           <Text style={styles.buttonText}>Cancel</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.next]}>
+
+        <TouchableOpacity style={[styles.button, styles.next]} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Post</Text>
         </TouchableOpacity>
+
       </SafeAreaView>
     </ScrollView>
   );

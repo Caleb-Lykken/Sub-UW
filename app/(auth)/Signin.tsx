@@ -35,7 +35,7 @@ export default function SignIn() {
         <Text style={styles.rememberText}>Remember me</Text>
       </SafeAreaView>
 
-      <TouchableOpacity style={styles.signInButton} onPress={() => router.replace('/MainMenu')}>
+      <TouchableOpacity style={styles.signInButton} onPress={() => router.replace('/FindSublet')}>
       <Text style={styles.signInText}>Sign in</Text>
       </TouchableOpacity>
     </SafeAreaView>
