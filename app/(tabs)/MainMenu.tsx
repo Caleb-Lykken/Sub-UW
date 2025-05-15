@@ -1,44 +1,49 @@
 import React from 'react';
-import { SafeAreaView, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import HeaderImage from '@/assets/images/Mainmenu.png';
+import HeaderImage from '@/assets/images/Mainmenu.png'; 
 
 export default function MainMenu() {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* Header */}
-      <SafeAreaView style={styles.headerContainer}>
+      <View style={styles.headerContainer}>
         <Image source={HeaderImage} style={styles.headerImage} resizeMode="cover" />
-        <SafeAreaView style={styles.overlay}>
+        <View style={styles.overlay}>
           <Text style={styles.locationButton}>📍 Location</Text>
           <Text style={styles.headerText}>Find Your Perfect{'\n'}Sublet Match with Us.</Text>
-        </SafeAreaView>
-      </SafeAreaView>
+          <TouchableOpacity onPress={() => router.push('/Messages')}>
+          <Text style={styles.messageButton}>💬 Message</Text>
+          </TouchableOpacity>
+
+        </View>
+      </View>
 
       {/* Body */}
-      <SafeAreaView style={styles.body}>
+      <View style={styles.body}>
         <Text style={styles.title}>Home page</Text>
 
-        <SafeAreaView style={styles.buttonRow}>
-          <TouchableOpacity style={styles.buttonBox} onPress={() => router.navigate('./FindSublet')}>
+        <View style={styles.buttonRow}>
+        <TouchableOpacity style={styles.buttonBox} onPress={() => router.push('/FindSublet')}>
             <Text style={styles.buttonIcon}>📍</Text>
             <Text style={styles.buttonText}>Find Sublets</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.buttonBox} onPress={() => router.navigate('/PostSublet')}>
+          <TouchableOpacity style={styles.buttonBox} onPress={() => router.push('/PostSublet')}>
             <Text style={styles.buttonIcon}>📤</Text>
             <Text style={styles.buttonText}>Post Sublets</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.buttonBox} onPress={() => router.navigate('/EditProfile')}>
-            <Text style={styles.buttonIcon}>👤</Text>
-            <Text style={styles.buttonText}>Profile</Text>
-          </TouchableOpacity>
-        </SafeAreaView>
-      </SafeAreaView>
-    </SafeAreaView>
+          <TouchableOpacity style={styles.buttonBox} onPress={() => router.push('/EditProfile')}>
+          <Text style={styles.buttonIcon}>👤</Text>
+          <Text style={styles.buttonText}>Profile</Text>
+        </TouchableOpacity>
+
+        </View>
+      </View>
+    </View>
   );
 }
 
@@ -47,6 +52,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#2e2e2e',
   },
+  messageButton: {
+    backgroundColor: 'white',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    fontSize: 12,
+    marginBottom: 10,
+    marginTop: 4, 
+  },
+  
   headerContainer: {
     height: 250,
     width: '100%',
@@ -83,8 +99,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 16,
-    marginLeft: '5%',
-    marginRight: '5%',
   },
   title: {
     color: 'white',
