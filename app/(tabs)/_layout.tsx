@@ -48,8 +48,12 @@ return (
       options={{title: 'Post'}}
     />
     <Tabs.Screen
-      name="EditProfile"
+      name="Profile"
       options={{title: 'Profile'}}
+    />
+    <Tabs.Screen
+      name="Message"
+      options={{title: 'Message'}}
     />
     
   </Tabs>

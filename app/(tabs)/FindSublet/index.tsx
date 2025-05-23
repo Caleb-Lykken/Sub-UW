@@ -131,7 +131,7 @@ export default function FindSublet() {
 
         {/* Sublet Card */}
         {filteredListings.map((item) => (
-          <TouchableOpacity onPress={() => router.push(`FindSublet/Sublet/${String(item.id)}` as any)} key={item.id}>
+          <TouchableOpacity onPress={() => router.push(`FindSublet/${String(item.id)}` as any)} key={item.id}>
             <SafeAreaView key={item.id} style={styles.card}>
 
               {/* Card Photo */}

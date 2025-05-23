@@ -205,7 +205,7 @@ export default function PostSublet() {
           <Text style={styles.buttonText}>Cancel</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.button, styles.next]} onPress={handleSubmit}>
+        <TouchableOpacity style={[styles.button, styles.post]} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Post</Text>
         </TouchableOpacity>
 
@@ -285,7 +285,8 @@ const styles = StyleSheet.create({
     buttonRow: {
       flexDirection: 'row',
       justifyContent: 'space-around',
-      paddingHorizontal: 16,
+      paddingHorizontal: '5%',
+      marginHorizontal: '5%',
       marginTop: 10,
     },
     button: {
@@ -298,7 +299,7 @@ const styles = StyleSheet.create({
     cancel: {
       backgroundColor: '#c14f7a',
     },
-    next: {
+    post: {
       backgroundColor: '#8a2be2',
     },
     buttonText: {

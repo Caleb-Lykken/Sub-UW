@@ -82,123 +82,128 @@ export default function Sublet() {
           <Text style={styles.sectionHeader}>Description</Text>
           <Text style={styles.desc}>{listing.description}</Text>
         </SafeAreaView>
+
+        {/* Contact */}
+        <TouchableOpacity style={styles.contact} onPress={() => router.navigate('/Profile')}>
+          <Text style={styles.contactText}>Contact</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#2e2e2e',
-    },
-    banner: {
-      backgroundColor: '#7a4dd6',
-      paddingTop: 30,
-      paddingBottom: 40,
-      alignItems: 'center',
-    },
-    bannerText: {
-      fontSize: 24,
-      color: 'white',
-      fontWeight: '600',
-    },
-    section: {
-      color: '#fff',
-      paddingLeft: '5%',
-      paddingRight: '5%',
-      marginBottom: 6,
-    },
-    sectionTitle: {
-      color: 'white',
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginTop: 12,
-      marginBottom: 6,
-      textAlign: 'center',
-    },
-    sectionHeader: {
-      color: '#fff',
-      fontSize: 16,
-      fontWeight: 'bold',
-      marginBottom: 4,
-    },
-    sectionText: {
-      color: '#fff',
-    },
-    grid: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      gap: 8,
-      marginBottom: 16,
-    },
-    tag: {
-      backgroundColor: 'white',
-      paddingVertical: 4,
-      paddingHorizontal: 8,
-      borderRadius: 8,
-    },
-    tagText: {
-      fontSize: 12,
-    },
-    imagePlaceholderContainer: {
-      width: '100%',
-      height: 250,
-      overflow: 'hidden',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    imagePlaceholder: {
-      width: '100%',
-      height: '100%',
-      overflow: 'hidden',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    priceTag: {
-      position: 'absolute',
-      top: 10,
-      left: 10,
-      backgroundColor: '#6fff9f',
-      color: '#006400',
-      fontWeight: 'bold',
-      paddingHorizontal: 8,
-      paddingVertical: 2,
-      borderRadius: 8,
-      fontSize: 14,
-    },
-    address: {
-      color: 'white',
-      fontWeight: 'bold',
-      marginBottom: 4,
-    },
-    desc: {
-      color: '#ddd',
-      fontSize: 12,
-    },
-    date: {
-      color: '#ccc',
-      fontSize: 14,
-      marginTop: 4,
-    },
-    bedBath:{
-      color: '#ccc',
-      fontSize: 14,
-      marginTop: 4,
-    },
-    back: {
-      marginTop: 24,
-      marginRight: '35%',
-      marginLeft: '35%',
-      marginBottom: 24,
-      backgroundColor: '#d9534f',
-      paddingVertical: 10,
-      paddingHorizontal: 24,
-      borderRadius: 12,
-      alignItems: 'center',
-    },
-    backText: {
-      color: 'white',
-      fontWeight: 'bold',
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: '#2e2e2e',
+  },
+  banner: {
+    backgroundColor: '#7a4dd6',
+    paddingTop: 30,
+    paddingBottom: 40,
+    alignItems: 'center',
+  },
+  bannerText: {
+    fontSize: 24,
+    color: 'white',
+    fontWeight: '600',
+  },
+  section: {
+    color: '#fff',
+    paddingLeft: '5%',
+    paddingRight: '5%',
+    marginBottom: 6,
+  },
+  sectionTitle: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 12,
+    marginBottom: 6,
+    textAlign: 'center',
+  },
+  sectionHeader: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  sectionText: {
+    color: '#fff',
+  },
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 16,
+  },
+  tag: {
+    backgroundColor: 'white',
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 8,
+  },
+  tagText: {
+    fontSize: 16,
+  },
+  imagePlaceholderContainer: {
+    width: '100%',
+    height: 250,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imagePlaceholder: {
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  priceTag: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    backgroundColor: '#6fff9f',
+    color: '#006400',
+    fontWeight: 'bold',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 8,
+    fontSize: 16,
+  },
+  address: {
+    color: 'white',
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  desc: {
+    color: '#ddd',
+    fontSize: 16,
+  },
+  date: {
+    color: '#ccc',
+    fontSize: 16,
+    marginTop: 4,
+  },
+  bedBath:{
+    color: '#ccc',
+    fontSize: 16,
+    marginTop: 4,
+  },
+  contact: {
+    marginTop: 24,
+    marginRight: '35%',
+    marginLeft: '35%',
+    marginBottom: 24,
+    backgroundColor: '#8a2be2',
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  contactText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});
