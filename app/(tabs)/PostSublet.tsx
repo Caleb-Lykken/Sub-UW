@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { SafeAreaView, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { addDoc, collection } from "firebase/firestore";
 import { db, storage } from '@/firebase';
 

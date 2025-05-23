@@ -1,4 +1,6 @@
-import { SafeAreaView, ScrollView, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
+import {
+  SafeAreaView, ScrollView, Text, StyleSheet,
+  TextInput, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
 import AvatarIcon from '@/assets/images/Profile.png'; 

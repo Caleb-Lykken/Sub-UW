@@ -14,13 +14,13 @@ import { auth } from '@/firebase';
 export default function TabLayout() {
     // check if user is authenticated
     // if not, redirect to Signin
-//   onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//         return <Stack />;
-//     } else {
-//         return <Redirect href="/Signin" />;
-//     }
-//   });
+    //   onAuthStateChanged(auth, (user) => {
+    //     if (user) {
+    //         return <Stack />;
+    //     } else {
+    //         return <Redirect href="/Signin" />;
+    //     }
+    //   });
 
 const colorScheme = useColorScheme();
 
@@ -39,13 +39,6 @@ return (
         default: {},
       }),
     }}> 
-    <Tabs.Screen
-      name="MainMenu"
-      options={{
-        title: 'Home',
-        tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-      }}
-    />
     <Tabs.Screen
       name="FindSublet"
       options={{title: 'Find'}}
