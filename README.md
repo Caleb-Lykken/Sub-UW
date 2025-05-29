@@ -56,7 +56,8 @@ Join our community of developers creating universal apps.
 
 
 ## Roadmap  
-- Basic listing & search functionality  
+- Basic listing/posting functionality
+- Search and filtering
 - User authentication & verification  
 
 ## Contributing  
